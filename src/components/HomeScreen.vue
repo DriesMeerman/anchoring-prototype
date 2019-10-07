@@ -28,7 +28,7 @@
             </div>
             
             <div class="login-holder">
-                <button class="btn btn-primary">Register</button>
+                <button v-on:click="openRegistration" class="btn btn-primary">Register</button>
             </div>
             
         </div>
@@ -37,10 +37,18 @@
 
 <script>
 import SimpleTile from './SimpleTile.vue';
+import Router from 'vue-router'
 
 export default {
   name: 'HomeScreen',
   props: {},
+  methods: {
+      openRegistration: function(evt){
+          this.$router.push({
+              name: 'signup'
+          })
+      }
+  },
   components: {
     SimpleTile
   }

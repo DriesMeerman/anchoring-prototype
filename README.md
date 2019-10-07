@@ -25,5 +25,5 @@ npm run test
 ```
 npm run lint
 ```
-# Acknoledgements
+# Acknowledgements
 Logo generated using https://hatchful.shopify.com/
