@@ -1,4 +1,5 @@
 # anchoring-prototype
+Goal of this prototype is to test the influence of anchoring on a prototyping session.
 
 ## Project setup
 ```
@@ -24,6 +25,5 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Acknoledgements
+Logo generated using https://hatchful.shopify.com/
