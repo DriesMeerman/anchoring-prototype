@@ -28,7 +28,7 @@
     </range-slider>
 
     <div>
-        <h5>Current points {{(sharing * 10) + 200}}</h5>
+        <h5>Current points {{calculatePoints()}}</h5>
     </div>
 
     <div v-for="question in questions" v-if="sharing >= question.minShareCount">
@@ -46,6 +46,7 @@
     </div>
     
     <button class="btn  form-control mb-4"
+            v-on:click="submit"
             :class="submitClass()" >Submit</button>
   </div>
 </template>
@@ -141,6 +142,17 @@ export default {
         },
         canSubmit(){
             return hasBeenAnswered(this.sharing, this.questions) && this.firstName && this.lastName && this.email;
+        },
+        calculatePoints(){
+            return (this.sharing * 10) + 200;
+        },
+        submit(){
+            if (!this.canSubmit()) return;
+            window.setPoints = true; //lazy bad
+            this.$root.$data.sharedState.points = this.calculatePoints();
+            this.$router.push({
+              name: 'Home'
+            })
         }
     }
 };

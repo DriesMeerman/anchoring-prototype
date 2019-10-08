@@ -1,7 +1,12 @@
 <template>
     <div>
-        <img id="logo" :src="require('./../assets/logo.png')">
-        <h1>Welcome</h1>
+        <img id="logo" :src="require('./../assets/logo.png')" v-on:click="redirectHome">
+        <h3 v-if="entry">Welcome</h3>
+        <h4 v-if="!entry">{{getPoints()}} Points</h4>
+        <div v-if="entry" class="text-message">
+                By using this app you gather points by providing information on yourself and your public transportation travels.
+                Here are a few examples of things you can purchase with your points:
+        </div>
         <div class="tile-container">
             <div class="d-container">
                 <div class="d-row">
@@ -26,8 +31,12 @@
                                 bottomText="7 euro + 400 points"></SimpleTile>
                 </div>
             </div>
+
+            <div v-if="entry" class="text-message w-100">
+                Click register to sign up and receive your first {{signupPoints}}
+            </div>
             
-            <div class="login-holder">
+            <div class="login-holder" v-if="entry">
                 <button v-on:click="openRegistration" class="btn btn-primary">Register</button>
             </div>
             
@@ -41,12 +50,27 @@ import Router from 'vue-router'
 
 export default {
   name: 'HomeScreen',
-  props: {},
+  props: {
+      entry: Boolean
+  },
+  computed: {
+      signupPoints: function() {return this.$root.$data.signupPoints}
+  },
   methods: {
       openRegistration: function(evt){
           this.$router.push({
               name: 'signup'
           })
+      },
+      getPoints(){
+          return this.$root.$data.sharedState.points
+      },
+      redirectHome(){
+          if(this.$router.currentRoute.name !== 'Entry'){
+                this.$router.push({
+                    name: 'Entry'
+                });
+          }
       }
   },
   components: {
@@ -58,8 +82,15 @@ export default {
 <style lang="stylus" scoped>
     #logo{
         max-width: 100%;   
-        height: 6rem;
+        height: 5rem;
     }
+
+    .text-message{
+        font-size: 90%;
+        /* opacity: 0.7; */
+        margin: 0.8rem 0.2rem;
+    }
+
     .tile-container{
         display: flex;
         flex-wrap: wrap;

@@ -17,13 +17,28 @@ const router =  new Router({
 routes: [
   {      
     path: '/',     
-    name: 'HomeScreen',     
-    component: HomeScreen
+    name: 'Entry',     
+    component: HomeScreen,
+    props: {
+      entry: true
+    }
   },
   {      
     path: '/signup',     
     name: 'signup',     
     component: SignupBasicVue
+  },
+  {      
+    path: '/home',     
+    name: 'Home',     
+    component: HomeScreen,
+    beforeEnter: function (to, from, next) {
+      if (!window.setPoints){ //bigbrain
+        next('/');
+        return;
+      }
+      next();
+    }
   }
   ]
   });
