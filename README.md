@@ -1,5 +1,6 @@
 # anchoring-prototype
-Goal of this prototype is to test the influence of anchoring on a prototyping session.
+Goal of this prototype is to test the influence of anchoring on a prototyping session.  
+[Live Demo](https://driesmeerman.github.io/anchoring-prototype)
 
 ## Project setup
 ```

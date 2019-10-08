@@ -6,33 +6,44 @@
 
 <script>
 import Vue from 'vue' 
-import Router from 'vue-router'
-import HomeScreen from './components/HomeScreen.vue'
-import SignupBasicVue from './components/SignupBasic.vue';
+import routes from './routes/index';
 
-Vue.use(Router);
+const ConfigA = require('./data/configurationA');
+const ConfigB = require('./data/configurationB');
 
-//todo move to own file
-const router =  new Router({  
-routes: [
-  {      
-    path: '/',     
-    name: 'HomeScreen',     
-    component: HomeScreen
-  },
-  {      
-    path: '/signup',     
-    name: 'signup',     
-    component: SignupBasicVue
+const VERSIONS = {
+  A: 'a',
+  B: 'b'
+}
+
+/**
+ * @param {string} version
+ * @returns {object}
+ */
+function getConfig(version){
+  switch (version){
+    case VERSIONS.A:
+      return ConfigA;
+    case VERSIONS.B:
+      return ConfigB;
+    default:
+      return ConfigA;
   }
-  ]
-  });
-
+}
   
+
 
 export default {
   name: 'app',
-  router: router,
+  router: routes,
+  mounted: function() {
+    const version = this.$route.query.version
+    const config = getConfig(version);
+    let sharedState = this.$root.$data.sharedState;
+    
+    sharedState.questions = config.questions;
+    sharedState.signupBonus = config.signupBonus;
+  }
 }
 </script>
 
@@ -43,6 +54,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 60px; */
 }
 </style>

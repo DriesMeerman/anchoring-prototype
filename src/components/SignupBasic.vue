@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <h1>Register</h1>
-    <p class="text-emph" >You get <u>200 points</u> for signing up with your name and email</p>
+    <p class="text-emph" >You get <u>{{signupBonus}} points</u> for signing up with your name and email</p>
     <div class="form-group">
       <label for="usr">First Name:</label>
       <input type="text" class="form-control" id="usr" v-model="firstName" />
@@ -28,7 +28,7 @@
     </range-slider>
 
     <div>
-        <h5>Current points {{(sharing * 10) + 200}}</h5>
+        <h5>Current points {{calculatePoints()}}</h5>
     </div>
 
     <div v-for="question in questions" v-if="sharing >= question.minShareCount">
@@ -46,6 +46,7 @@
     </div>
     
     <button class="btn  form-control mb-4"
+            v-on:click="submit"
             :class="submitClass()" >Submit</button>
   </div>
 </template>
@@ -55,6 +56,8 @@ import RangeSlider from 'vue-range-slider'
 import 'vue-range-slider/dist/vue-range-slider.css'
 
 /**
+ * @param {number} shareCount
+ * @param {object[]} questions see configuration files in Data for format.
  * @returns {boolean} whether values have been set on the questions until that sharecount
  */
 function hasBeenAnswered(shareCount, questions){
@@ -74,66 +77,9 @@ export default {
             email: null,
             age: null,
             sharing: 0,
-            questions: [
-                {
-                    label: 'Age', 
-                    type: 'number',
-                    minShareCount: 10,
-                    answer: null  
-                },
-                {
-                    label: 'Gender',
-                    type: 'dropdown',
-                    options: ['Male', 'Female', 'Other'],
-                    minShareCount: 20,
-                    answer: null
-                },
-                {
-                    label: 'Postal Code', 
-                    type: 'text',
-                    minShareCount: 30,
-                    answer: null  
-                },
-                {
-                    label: 'Highest achieved education',
-                    type: 'dropdown',
-                    options: [
-                        'None',
-                        'Basisonderwijs',
-                        'VMBO',
-                        'HAVO',
-                        'VWO',
-                        'MBO',
-                        'Bachelor',
-                        'Master',
-                        'PhD'
-                    ],
-                    minShareCount: 40,
-                    answer: null
-                },
-                {
-                    label: 'Bruto Salary',
-                    type: 'dropdown',
-                    options: [
-                        'Less than €1000',
-                        '€1000 - 1999',
-                        '€2000 - 2999',
-                        '€3000 - 3999',
-                        '€4000 - 4999',
-                        'More than €5000'
-                    ],
-                    minShareCount: 50,
-                    answer: null
-                }
-            ]
+            questions: this.$root.$data.sharedState.questions || [],
+            signupBonus: this.$root.$data.sharedState.signupBonus || 0
         };
-    },
-
-
-    watch: {
-        sharing() {
-            //console.log(this.sharing)
-        }
     },
     methods: {
         submitClass(){
@@ -141,6 +87,17 @@ export default {
         },
         canSubmit(){
             return hasBeenAnswered(this.sharing, this.questions) && this.firstName && this.lastName && this.email;
+        },
+        calculatePoints(){
+            return (this.sharing * 10) + this.signupBonus;
+        },
+        submit(){
+            if (!this.canSubmit()) return;
+            window.setPoints = true; //lazy bad
+            this.$root.$data.sharedState.points = this.calculatePoints();
+            this.$router.push({
+              name: 'Home'
+            })
         }
     }
 };
