@@ -6,24 +6,24 @@
             <div class="d-container">
                 <div class="d-row">
                     <SimpleTile class="tile col-md-6"
-                                image="https://i.imgur.com/WEYAiGu.jpg"
-                                topText="memer"
-                                bottomText="200"></SimpleTile>
+                                image="https://i.imgur.com/FQTPXy6.jpg"
+                                topText="Zalando Giftcard"
+                                bottomText="15 euro + 2100 points"></SimpleTile>
                     <SimpleTile class="tile col-md-6"
-                                image="https://i.imgur.com/Sfv8yEP.jpg"
-                                topText="Formula 1"
-                                bottomText="1500"></SimpleTile>
+                                image="https://i.imgur.com/pUCycXK.png"
+                                topText="Dolfinarium"
+                                bottomText="10 euro + 700 points"></SimpleTile>
                 </div>
 
                 <div class="d-row">
                     <SimpleTile class="tile col-md-6"
-                                image="https://i.imgur.com/uIEexIc.jpg"
-                                topText="Vaporwave"
-                                bottomText="50"></SimpleTile>
+                                image="https://i.imgur.com/8UvxDbt.jpg"
+                                topText="Koffie Giftcard"
+                                bottomText="2200 points"></SimpleTile>
                     <SimpleTile class="tile col-md-6"
-                                image="https://i.imgur.com/XkI2bc6.jpg?1"
-                                topText="Pepsi"
-                                bottomText="80"></SimpleTile>
+                                image="https://i.imgur.com/t4CJfXl.jpg"
+                                topText="Pathe Voucher"
+                                bottomText="7 euro + 400 points"></SimpleTile>
                 </div>
             </div>
             
