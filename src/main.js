@@ -7,9 +7,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(BootstrapVue)
-
 Vue.config.productionTip = false
 
+
+let store = {
+  state: {
+    signupPoints: null
+  }
+}
+
 new Vue({
+  data: {sharedState: store.state},
   render: h => h(App),
 }).$mount('#app')
