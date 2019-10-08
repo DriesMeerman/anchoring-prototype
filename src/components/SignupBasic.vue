@@ -15,6 +15,7 @@
       <input type="email" class="form-control" id="mail" v-model="email"/>
     </div>
 
+    <hr class="mt-5">
     <p class="text-emph">You can gather additional points by adjusting the slider to share more information</p>
     
         
@@ -72,7 +73,7 @@ export default {
             lastName: null,
             email: null,
             age: null,
-            sharing: 20,
+            sharing: 0,
             questions: [
                 {
                     label: 'Age', 
@@ -140,22 +141,6 @@ export default {
         },
         canSubmit(){
             return hasBeenAnswered(this.sharing, this.questions) && this.firstName && this.lastName && this.email;
-            // switch (this.sharing){
-                
-            //     case 10:
-
-            //         break;
-            //     case 20: 
-            //         break;
-            //     case 30:
-            //         break;
-            //     case 40:
-            //         break;
-            //     case 50:
-            //         break;
-            //     default:
-            //         return false;
-            // }
         }
     }
 };
@@ -165,6 +150,10 @@ export default {
 
     .text-emph{
         font-weight: 500;
+    }
+
+    .text-emph > u {
+        color: #0f4aee !important
     }
 
     .slider {
