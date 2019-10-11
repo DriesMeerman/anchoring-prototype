@@ -21,6 +21,10 @@
             <div v-if="entry" class="text-message w-100">
                 Click register to sign up and receive your first {{signupPoints}}
             </div>
+
+            <div v-if="entry" class="text-message w-100">
+                Click register to sign up and receive your first {{signupPoints}}
+            </div>
             
             <div class="login-holder" v-if="entry">
                 <button v-on:click="openRegistration" class="btn btn-primary">Register</button>

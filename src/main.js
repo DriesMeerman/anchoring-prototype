@@ -15,6 +15,7 @@ let store = {
   }
 };
 
+
 new Vue({
   data: {
     sharedState: store.state
