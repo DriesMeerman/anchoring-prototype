@@ -2,7 +2,10 @@
     <div>
         <img id="logo" :src="require('./../assets/logo.png')" v-on:click="redirectHome">
         <h3 v-if="entry">Welcome</h3>
-        <h4 v-if="!entry">{{getPoints()}} Points</h4>
+        <div v-if="!entry">
+            <h3>Registration Success</h3>
+            <h4 >{{getPoints()}} Points</h4>
+        </div>
         <div v-if="entry" class="text-message">
                 By using this app you gather points by providing information on yourself and your public transportation travels.
                 Here are a few examples of things you can purchase with your points:
@@ -16,10 +19,6 @@
                                 :topText="tile.topText"
                                 :bottomText="tile.bottomText"></SimpleTile>
                 </div>
-            </div>
-
-            <div v-if="entry" class="text-message w-100">
-                Click register to sign up and receive your first {{signupPoints}}
             </div>
 
             <div v-if="entry" class="text-message w-100">

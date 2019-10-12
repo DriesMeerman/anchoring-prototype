@@ -110,7 +110,7 @@ export default {
     }
 
     .text-emph > u {
-        color: #0f4aee !important
+        font-weight: 600 !important;
     }
 
     .slider {
