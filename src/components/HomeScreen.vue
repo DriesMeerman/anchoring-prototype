@@ -1,16 +1,28 @@
 <template>
     <div>
         <img id="logo" :src="require('./../assets/logo.png')" v-on:click="redirectHome">
-        <h3 v-if="entry">Welcome</h3>
+        <h4 v-if="entry">Welcome</h4>
         <div v-if="!entry">
             <h3>Registration Success</h3>
             <h4 >{{getPoints()}} Points</h4>
         </div>
         <div v-if="entry" class="text-message">
                 By using this app you gather points by providing information on yourself and your public transportation travels.
-                Here are a few examples of things you can purchase with your points:
+                 <br/>
         </div>
-        <div class="tile-container">
+
+        <div class="continue-holder" v-if="introScreen">
+
+                <div>Continue signing up to get</div>
+                <h3>{{signupBonus}} points</h3>
+
+                <button v-on:click="intro = false" class="btn btn-primary mt-5">Continue</button>
+        </div>
+
+        <div class="tile-container" v-if="!introScreen">
+            <div v-if="entry">
+                Here are a few examples of things you can purchase with your points
+            </div>
             <div class="d-container">
                 <div class="d-row" v-for="row in tiles">
                     <SimpleTile v-for="tile in row"
@@ -22,7 +34,7 @@
             </div>
 
             <div v-if="entry" class="text-message w-100">
-                Click register to sign up and receive your first {{signupPoints}}
+                Click register to sign up and receive your first <u>{{signupBonus}}</u>
             </div>
             
             <div class="login-holder" v-if="entry">
@@ -45,11 +57,15 @@ export default {
   },
   data() {
       return {
-          tiles: tiles
+          tiles: tiles,
+          intro: true
       }
   },
   computed: {
-      signupPoints: function() {return this.$root.$data.signupPoints}
+      signupBonus() {
+          return this.$root.$data.sharedState.signupBonus;
+      },
+      introScreen: function(){return this.entry && this.intro}
   },
   methods: {
       openRegistration: function(evt){
@@ -74,7 +90,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
     #logo{
         max-width: 100%;   
         height: 5rem;
@@ -85,6 +101,15 @@ export default {
         /* opacity: 0.7; */
         margin: 0.8rem 0.2rem;
     }
+
+    .continue-holder {
+        margin: 1rem 2rem;
+        > button {
+            width: 100%;
+        }
+    }
+
+
 
     .tile-container{
         display: flex;

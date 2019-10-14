@@ -16,7 +16,9 @@
     </div>
 
     <hr class="mt-5">
-    <p class="text-emph">You can gather additional points by adjusting the slider to share more information</p>
+    <p class="text-emph">You can gather additional points by adjusting the slider to share more information
+        Before you can submit you have to move the slider at least onceS
+    </p>
     
         
     <range-slider
@@ -70,6 +72,12 @@ export default {
   components: {
       RangeSlider
   },
+
+  watch:{
+      sharing: function(){
+          this.sliderMoved = true;
+      }
+  },
   data() {
         return {
             firstName: null,
@@ -77,6 +85,7 @@ export default {
             email: null,
             age: null,
             sharing: 0,
+            sliderMoved: false,
             questions: this.$root.$data.sharedState.questions || [],
             signupBonus: this.$root.$data.sharedState.signupBonus || 0
         };
@@ -86,7 +95,7 @@ export default {
             return this.canSubmit() ? 'btn-primary' : 'btn-secondary';
         },
         canSubmit(){
-            return hasBeenAnswered(this.sharing, this.questions) && this.firstName && this.lastName && this.email;
+            return this.sliderMoved && hasBeenAnswered(this.sharing, this.questions) && this.firstName && this.lastName && this.email;
         },
         calculatePoints(){
             return (this.sharing * 10) + this.signupBonus;
